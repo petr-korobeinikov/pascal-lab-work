@@ -1,0 +1,7 @@
+{
+
+}
+procedure AddressBookRemoveEntry;
+begin
+
+end;

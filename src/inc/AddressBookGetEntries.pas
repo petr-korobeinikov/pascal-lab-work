@@ -1,0 +1,7 @@
+{
+
+}
+procedure AddressBookGetEntries;
+begin
+
+end;

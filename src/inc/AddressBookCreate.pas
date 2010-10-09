@@ -1,0 +1,7 @@
+{
+
+}
+procedure AddressBookCreate;
+begin
+
+end;
