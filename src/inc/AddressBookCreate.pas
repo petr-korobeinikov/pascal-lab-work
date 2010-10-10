@@ -2,7 +2,7 @@
 
 }
 
-{$I AddressBookEntry.pas}         { /*__*/ }
+//{$I AddressBookEntry.pas}         { /*__*/ }
 
 procedure AddressBookCreate(name : String);
 var
@@ -17,5 +17,8 @@ begin
         if IOResult <> 0 then
         begin
                 writeln('Error: IOResult <> 0');
+        end else
+        begin
+                close(f);
         end;
 end;
