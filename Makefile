@@ -5,10 +5,12 @@ MKDIR=         mkdir
 CC=            fpc
 
 BIN_DIR=       ./bin/
+BOOKS_DIR=     ./bin/books/
 SRC_DIR=       ./src/
 
 
 compile:
-	test -d $(BIN_DIR) || $(MKDIR) $(BIN_DIR)
+	$(TEST) -d $(BIN_DIR) || $(MKDIR) $(BIN_DIR)
+	$(TEST) -d $(BOOKS_DIR) || $(MKDIR) $(BOOKS_DIR)
 	$(CC) -o$(BIN_DIR)AddressBook $(SRC_DIR)AddressBook.pas
 
