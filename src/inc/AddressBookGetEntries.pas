@@ -13,7 +13,8 @@ begin
 
         if IOResult <> 0 then
         begin
-                writeln('Error: IOResult <> 0');
+                AddressBookError := ADDRESS_BOOK_IO_ERROR;
+                exit;
         end else
         begin
                 while not eof(f) do
