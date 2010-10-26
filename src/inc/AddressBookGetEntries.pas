@@ -1,7 +1,7 @@
 {
 
 }
-procedure AddressBookGetEntries(name : String);
+procedure AddressBookGetEntries(name : string);
 var
         f     : file of AddressBookEntry;
         entry : AddressBookEntry;

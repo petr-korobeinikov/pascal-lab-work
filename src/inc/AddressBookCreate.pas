@@ -2,8 +2,6 @@
 
 }
 
-//{$I AddressBookEntry.pas}         { /*__*/ }
-
 procedure AddressBookCreate(name : String);
 var
         f : file of AddressBookEntry;
@@ -20,6 +18,7 @@ begin
                 exit;
         end else
         begin
+                AddressBookError := ADDRESS_BOOK_OK;
                 close(f);
         end;
 end;

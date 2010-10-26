@@ -1,18 +1,25 @@
 {
 
 }
-Program AddressBook;
+program AddressBook;
 
 {$I inc/AddressBookEntry.pas}         { /*__*/ }
 
-Const
+const
+        ADDRESS_BOOK_OK       = 0;
         ADDRESS_BOOK_IO_ERROR = 1;    { /*__*/ }
 
-Var
-        AddressBookError : Integer;
-        entry            : AddressBookEntry;
+var
+        AddressBookError   : integer;
+        AddressBookCurrent : string[80];  // current book name
+        AddressBookList    : array[0..1] of AddressBookEntry { Use dynamic pointer }
 
-        choice : Integer; // remove when curses appears
+
+        entry   : AddressBookEntry;
+        choice  : integer; // remove when curses appears
+
+        name    : string[80];
+        current : string[80];
 
 {$I inc/AddressBookCreate.pas}        { /*__*/ }
 {$I inc/AddressBookAddEntry.pas}      { /*__*/ }
@@ -20,13 +27,7 @@ Var
 {$I inc/AddressBookRemoveEntry.pas}   { /*__*/ }
 
 
-Begin
-{
-        AddressBookCreate('friends');
-        AddressBookCreate('co-workers');
-        AddressBookCreate('family');
-}
-
+begin
 {
 with entry do
 begin
@@ -37,10 +38,8 @@ begin
         Email         := 'johndoe@gmail.com';
         ICQ           :=  123456789;
 end;
-}
 
-{
-        AddressBookAddEntry('books/family', entry);
+AddressBookAddEntry('books/family', entry);
 }
 
 writeln('Welcome to stub!');
@@ -54,7 +53,7 @@ writeln('0. Exit');
 repeat
         begin
                 write('Choose a number of action: ');
-                read(choice);
+                readln(choice);
                 writeln('You choose: ', choice);
 
                 case choice of
@@ -64,15 +63,35 @@ repeat
                                 end;
                         1 :
                                 begin
-                                writeln('');
+                                        write('Input a name for new address book: ');
+                                        readln(name);
+                                        AddressBookCreate(name);
+                                        if AddressBookError <> ADDRESS_BOOK_OK then
+                                                writeln('Some errors happend! =(')
+                                        else
+                                                writeln('Book successfully created!')
                                 end;
                         2 :
                                 begin
-                                writeln('');
+                                writeln('Input a name of book you choose: ');
                                 end;
                         3 :
                                 begin
-                                writeln('');
+                                write('Input a name of a book you choose: ');
+                                readln(name);
+                                writeln('Input a person information.');
+                                write(': ');
+                                readln();
+                                write(': ');
+                                readln();
+                                write(': ');
+                                readln();
+                                write(': ');
+                                readln();
+                                write(': ');
+                                readln();
+                                write(': ');
+                                readln();
                                 end;
                         4 :
                                 begin
@@ -94,4 +113,4 @@ begin
 end;
 }
 
-End.
+end.
