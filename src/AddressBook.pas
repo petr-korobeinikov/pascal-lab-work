@@ -11,8 +11,8 @@ const
 
 var
         AddressBookError   : integer;
-        AddressBookCurrent : string[80];  // current book name
-        AddressBookList    : array[0..1] of AddressBookEntry { Use dynamic pointer }
+        AddressBookCurrent : string[80];
+        AddressBookList    : array of AddressBookEntry;
 
 
         entry   : AddressBookEntry;
