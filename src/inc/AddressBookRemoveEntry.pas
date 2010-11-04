@@ -15,39 +15,39 @@ begin
         {$I+}
 
         if IOResult <> 0 then
-        begin
-                AddressBookError := ADDRESS_BOOK_IO_ERROR;
-                exit;
-        end
-        else
-        begin
-                fsize := filesize(f);
-                setlength(AddressBookEntryList, fsize);
-
-                i := 0;
-                j := 0;
-                while not eof(f) do
                 begin
-                        read(f, entry);
+                        AddressBookError := ADDRESS_BOOK_IO_ERROR;
+                        exit;
+                end
+        else
+                begin
+                        fsize := filesize(f);
+                        setlength(AddressBookEntryList, fsize);
 
-                        if i <> position then
+                        i := 0;
+                        j := 0;
+                        while not eof(f) do
                         begin
-                                AddressBookEntryList[j] := entry;
-                                inc(j);
+                                read(f, entry);
+
+                                if i <> position then
+                                begin
+                                        AddressBookEntryList[j] := entry;
+                                        inc(j);
+                                end;
+
+                                inc(i);
                         end;
 
-                        inc(i);
+                        rewrite(f);
+
+                        for i := 0 to sizeof(AddressBookEntryList) - 1 do
+                        begin
+                                writeln(i);
+                                write(f, AddressBookEntryList[i]);
+                        end;
+
+                        close(f);
+                        AddressBookError := ADDRESS_BOOK_OK;
                 end;
-
-                rewrite(f);
-
-                for i := 0 to sizeof(AddressBookEntryList) - 1 do
-                begin
-                        writeln(i);
-                        write(f, AddressBookEntryList[i]);
-                end;
-
-                close(f);
-                AddressBookError := ADDRESS_BOOK_OK;
-        end;
 end;
