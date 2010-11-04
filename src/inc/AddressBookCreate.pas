@@ -7,7 +7,7 @@ var
         f : file of AddressBookEntry;
 
 begin
-        assign(f, concat('books/' + name));
+        assign(f, name);
         {$I-}
         rewrite(f);
         {$I+}

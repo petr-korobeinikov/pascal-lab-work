@@ -14,3 +14,6 @@ compile:
 	$(TEST) -d $(BOOKS_DIR) || $(MKDIR) $(BOOKS_DIR)
 	$(CC) -o$(BIN_DIR)AddressBook $(SRC_DIR)AddressBook.pas
 
+clean:
+	find -name '*.bak' -delete
+	$(RM) $(BIN_DIR)*.o

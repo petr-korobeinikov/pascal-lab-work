@@ -22,7 +22,7 @@ begin
         else
         begin
                 fsize := filesize(f);
-                setlength(AddressBookEntryList, fsize - 1);
+                setlength(AddressBookEntryList, fsize);
 
                 i := 0;
                 j := 0;

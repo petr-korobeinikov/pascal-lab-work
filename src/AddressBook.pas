@@ -10,9 +10,9 @@ const
         ADDRESS_BOOK_IO_ERROR = 1;    { /*__*/ }
 
 var
-        AddressBookError   : integer;
-        AddressBookCurrent : string[80];
-        AddressBookEntryList    : array of AddressBookEntry;
+        AddressBookError        : integer;
+        AddressBookCurrent      : string[80]; // Name of book currently selected
+        AddressBookEntryList    : array of AddressBookEntry; { Used by AddressBookRemoveEntry() and AddressBookGetEntries() }
 
 
         entry   : AddressBookEntry;
@@ -29,9 +29,11 @@ var
 
 begin
 
+//AddressBookCreate('books/family');
+
 with entry do
 begin
-        Name          := 'John Doe 0';
+        Name          := 'John Doe';
         Phone         := '123 45 67';
         CelluarPhone  := '8 111 222 33 44';
         BirthDate     := '26.06.1988';
@@ -39,9 +41,9 @@ begin
         ICQ           :=  123456789;
 end;
 
-AddressBookAddEntry('books/family', entry);
+//AddressBookAddEntry('books/family', entry);
 
-//AddressBookRemoveEntry('books/family', 0);
+AddressBookRemoveEntry('books/family', 1);
 
 writeln('Welcome to stub!');
 writeln('1. Create new address book');
