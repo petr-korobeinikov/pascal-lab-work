@@ -3,15 +3,12 @@
 }
 procedure AddressBookRemoveEntry(name : string; position : integer);
 var
-        f : file of AddressBookEntry;
+        f       : file of AddressBookEntry;
+        i,
+        j       : integer;
+        entry   : AddressBookEntry;
+        fsize   : integer;
 begin
-{
-        1. Open file
-        2. Count entries
-        3. Read all entries exclude of entry on position
-        4. Rewrite file
-        5. Write all entries into a file.
-}
         assign(f, name);
         {$I-}
         reset(f);
@@ -21,20 +18,36 @@ begin
         begin
                 AddressBookError := ADDRESS_BOOK_IO_ERROR;
                 exit;
-        end else
+        end
+        else
         begin
-                // pointer logic goes here
-                writeln(filesize(f) - 1); // One record will be deleted.
+                fsize := filesize(f);
+                setlength(AddressBookEntryList, fsize - 1);
+
+                i := 0;
+                j := 0;
                 while not eof(f) do
                 begin
-                        // if curpos <> position
-                        //   read record
+                        read(f, entry);
+
+                        if i <> position then
+                        begin
+                                AddressBookEntryList[j] := entry;
+                                inc(j);
+                        end;
+
+                        inc(i);
                 end;
 
-                // rewrite(f)
+                rewrite(f);
 
-                // foreach record >> file
+                for i := 0 to sizeof(AddressBookEntryList) - 1 do
+                begin
+                        writeln(i);
+                        write(f, AddressBookEntryList[i]);
+                end;
 
                 close(f);
+                AddressBookError := ADDRESS_BOOK_OK;
         end;
 end;

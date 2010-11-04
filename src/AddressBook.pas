@@ -12,7 +12,7 @@ const
 var
         AddressBookError   : integer;
         AddressBookCurrent : string[80];
-        AddressBookList    : array of AddressBookEntry;
+        AddressBookEntryList    : array of AddressBookEntry;
 
 
         entry   : AddressBookEntry;
@@ -28,10 +28,10 @@ var
 
 
 begin
-{
+
 with entry do
 begin
-        Name          := 'John Doe';
+        Name          := 'John Doe 0';
         Phone         := '123 45 67';
         CelluarPhone  := '8 111 222 33 44';
         BirthDate     := '26.06.1988';
@@ -40,7 +40,8 @@ begin
 end;
 
 AddressBookAddEntry('books/family', entry);
-}
+
+//AddressBookRemoveEntry('books/family', 0);
 
 writeln('Welcome to stub!');
 writeln('1. Create new address book');
