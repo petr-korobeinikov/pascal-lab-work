@@ -3,11 +3,11 @@
 }
 procedure AddressBookRemoveEntry(name : string; position : integer);
 var
-        f       : file of AddressBookEntry;
+        f       : file of AddressBookEntry;   { Файловая переменная }
         i,
-        j       : integer;
-        entry   : AddressBookEntry;
-        fsize   : integer;
+        j       : integer;                    { Вспомогательныя переменные цикла }
+        entry   : AddressBookEntry;           { Запись в адресной книге }
+        fsize   : integer;                    { Размер файла }
 begin
         assign(f, name);
         {$I-}
@@ -16,17 +16,17 @@ begin
 
         if IOResult <> 0 then
                 begin
-                        AddressBookError := ADDRESS_BOOK_IO_ERROR;
-                        exit;
+                        AddressBookError := ADDRESS_BOOK_IO_ERROR;   { Сообщаем системе об ошибке }
+                        exit;                                        { Выход из процедуры }
                 end
         else
                 begin
-                        fsize := filesize(f);
-                        setlength(AddressBookEntryList, fsize);
+                        fsize := filesize(f);                     { Получаем размер файла }
+                        setlength(AddressBookEntryList, fsize);   { Изменяем размер массива для хранения записей }
 
                         i := 0;
                         j := 0;
-                        while not eof(f) do
+                        while not eof(f) do             { Считываем все записи из файла }
                         begin
                                 read(f, entry);
 
@@ -39,7 +39,7 @@ begin
                                 inc(i);
                         end;
 
-                        rewrite(f);
+                        rewrite(f);          { Удаляем все содержимое файла }
 
                         for i := 0 to sizeof(AddressBookEntryList) - 1 do
                         begin
@@ -47,7 +47,8 @@ begin
                                 write(f, AddressBookEntryList[i]);
                         end;
 
-                        close(f);
-                        AddressBookError := ADDRESS_BOOK_OK;
+                        close(f);                               { Закрываем файл }
+                        AddressBookError := ADDRESS_BOOK_OK;    { Сообщаем системе, что ошибок нет }
                 end;
 end;
+
