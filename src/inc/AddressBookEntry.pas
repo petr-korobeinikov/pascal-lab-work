@@ -1,5 +1,12 @@
 {
-
+        Структура данных "Запись адресной книги".
+        Поля записи:
+                Name           - Имя
+                Phone          - Телефон
+                CelluarPhone   - Сотовый телефон
+                BirthDate      - Дата рождения
+                Email          - Адрес электронной почты
+                ICQ            - Номер ICQ
 }
 type AddressBookEntry = record
         Name          : String[80];  { Имя }
