@@ -5,6 +5,7 @@ procedure AddressBookGetEntries(name : string);
 var
         f     : file of AddressBookEntry;        { Файловая переменная }
         entry : AddressBookEntry;                {  }
+        i     : integer;
 begin
         assign(f, name);             { Связываем файловую переменную с файлом }
         {$I-}
@@ -18,10 +19,14 @@ begin
                 end
         else
                 begin
+                        i := 0;
+                        setlength(AddressBookEntryList, filesize(f));
                         while not eof(f) do
                         begin
                                 read(f, entry);
-                                writeln(entry.Name, ' ', entry.Phone, ' ', entry.BirthDate);
+                                //writeln(entry.Name, ' ', entry.Phone, ' ', entry.BirthDate);
+                                AddressBookEntryList[i] := entry;
+                                inc(i);
                         end;
 
                         close(f);  { Закрываем файл }

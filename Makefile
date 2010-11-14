@@ -16,4 +16,5 @@ compile:
 
 clean:
 	find -name '*.bak' -delete
+	find -name '*.dia~' -delete
 	$(RM) $(BIN_DIR)*.o

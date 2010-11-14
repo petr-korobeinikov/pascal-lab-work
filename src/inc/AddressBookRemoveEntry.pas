@@ -21,12 +21,17 @@ begin
                 end
         else
                 begin
+                        {
+                                @todo:
+                                        Прочитать из файла все.
+                                        Записать только то, что нужно.
+                        }
                         fsize := filesize(f);                     { Получаем размер файла }
                         setlength(AddressBookEntryList, fsize);   { Изменяем размер массива для хранения записей }
 
                         i := 0;
                         j := 0;
-                        while not eof(f) do             { Считываем все записи из файла }
+                        while not eof(f) do                { Считываем все записи из файла }
                         begin
                                 read(f, entry);
 
@@ -41,7 +46,7 @@ begin
 
                         rewrite(f);          { Удаляем все содержимое файла }
 
-                        for i := 0 to sizeof(AddressBookEntryList) - 1 do
+                        for i := 0 to high(AddressBookEntryList) do
                         begin
                                 writeln(i);
                                 write(f, AddressBookEntryList[i]);
