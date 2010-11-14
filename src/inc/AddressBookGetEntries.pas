@@ -1,5 +1,7 @@
 {
-
+        Процедура получения записей из адресной книги
+        Параметры:
+                name   строка   название адресной книги
 }
 procedure AddressBookGetEntries(name : string);
 var

@@ -1,5 +1,8 @@
 {
-
+        Процедура удаления записи из адресной книги
+        Параметры
+                name       строка   название адресной книги
+                position   число    позиция в файле, которую надо удалить
 }
 procedure AddressBookRemoveEntry(name : string; position : integer);
 var

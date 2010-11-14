@@ -1,5 +1,8 @@
 {
-
+        Процедура добавления записи в адресную книгу.
+        Параметры:
+                name    строка   название адресной книги
+                entry   запись   запись адресной книги
 }
 procedure AddressBookAddEntry(name : string; entry : AddressBookEntry);
 var

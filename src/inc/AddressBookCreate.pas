@@ -1,5 +1,7 @@
 {
-
+        Процедура создания новой адресной книги.
+        Параметры:
+                name   строка   название книги
 }
 procedure AddressBookCreate(name : String);
 var
