@@ -8,6 +8,9 @@
                 Email          - Адрес электронной почты
                 ICQ            - Номер ICQ
 }
+{
+        @TODO: Разработать структуру Date
+}
 type AddressBookEntry = record
         Name          : String[80];  { Имя }
         Phone         : String[80];  { Телефон }
