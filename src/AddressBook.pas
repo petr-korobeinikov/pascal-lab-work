@@ -7,7 +7,8 @@
 }
 program AddressBook;
 uses
-        sysutils;
+        sysutils,
+        newt;
 
 {$I inc/AddressBookEntry.pas}         { Подключаем определение типа "Запись Адресной Книги" }
 
@@ -34,42 +35,17 @@ var
 {$I inc/AddressBookGetEntries.pas}    { Подключаем определение процедуры получения списка записей }
 {$I inc/AddressBookRemoveEntry.pas}   { Подключаем определение процедуры удаления записи из адресной книги }
 
-begin
-{
-AddressBookCreate('books/family');
+{$I ui/UI_ShowSplashScreen.pas}       { Подключаем определение процедуры вывода заставки программы }
 
-for i := 1 to 7 do
 begin
-        with entry do
-        begin
-                Name          := 'John Doe ' + IntToStr(i);
-                Phone         := '123 45 67';
-                CelluarPhone  := '8 111 222 33 44';
-                BirthDate     := '26.06.1988';
-                Email         := 'johndoe@gmail.com';
-                ICQ           :=  123456789;
-        end;
+        { Инициализируем псевдографику }
+        newtInit;
+        newtCls;
         
-        AddressBookAddEntry('books/family', entry);
-end;
-}
-
-{ AddressBookRemoveEntry('books/family', 1); }
-
-{ Считываем все записи из адресной книги }
-AddressBookGetEntries('books/family');
-if AddressBookError <> 0 then
-        begin
-                writeln('IO-error happend');
-        end
-else
-        begin
-                writeln('high(list)', high(AddressBookEntryList));
-                for i := 0 to high(AddressBookEntryList) do
-                begin
-                        writeln(AddressBookEntryList[i].Name, ' ', AddressBookEntryList[i].Phone, ' ', AddressBookEntryList[i].BirthDate);
-                end;
-        end;
-
+        { Выводим заставку }
+        UI_ShowSplashScreen;
+        
+        { Выключаем псевдографический режим }
+        newtFinished;
 end.
 
