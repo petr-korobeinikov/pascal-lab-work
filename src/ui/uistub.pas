@@ -1,5 +1,6 @@
 program newtstub;
 uses
+        sysutils,
         newt;
 
 {
@@ -33,28 +34,58 @@ end;
         Процедура вывода главного меню
 }
 procedure UI_ShowMainMenu;
+const
+        ACTION_CREATE = 0;
+        ACTION_CHOOSE = 1;
+        ACTION_WORK   = 2;
+        ACTION_SEARCH = 3;
+        ACTION_EXIT   = 4;
 var
         form,
         listBox : newtComponent;
+        p       : ^pchar;
+        s       : pchar;
+        i       : integer;
+        choices : array[ACTION_CREATE..ACTION_EXIT] of pchar;
 begin
+        choices[ACTION_CREATE] := 'Создать записную книжку';
+        choices[ACTION_CHOOSE] := 'Выбрать текущую записную книжку';
+        choices[ACTION_WORK]   := 'Работа с записной книжкой';
+        choices[ACTION_SEARCH] := 'Поиск по запросу';
+        choices[ACTION_EXIT]   := 'Выход';
+
         newtOpenWindow(10, 5, 41, 7, 'Главное меню');
         
-        listBox := newtListbox(1, 1, 5, NEWT_FLAG_RETURNEXIT);
-        newtListBoxAppendEntry(listBox, 'Создать записную книжку', nil);
-        newtListBoxAppendEntry(listBox, 'Выбрать текущую записную книжку', nil);
-        newtListBoxAppendEntry(listBox, 'Работа с записной книжкой', nil);
-        newtListBoxAppendEntry(listBox, 'Поиск по запросу', nil);
-        newtListBoxAppendEntry(listBox, 'Выход', nil);
+        listBox := newtListbox(1, 1, 5, NEWT_FLAG_RETURNEXIT or NEWT_FLAG_SCROLL);
+        newtListboxSetWidth(listBox, 39);
+        
+        for i := ACTION_CREATE to ACTION_EXIT do
+                newtListBoxAppendEntry(listBox, choices[i], @choices[i]);
         
         form := newtForm(nil, nil, NEWT_FLAG_RETURNEXIT);
-        newtFormAddComponents(
-                form,
-                listBox,
-                nil
-        );
+        newtFormAddComponent(form, listBox);
 
         newtRunForm(form);
         newtFormDestroy(form);
+        
+        p := newtListboxGetCurrent(listBox);
+                
+        newtFinished;
+        
+        writeln(p^);
+        s:=p^;
+        
+        for i := ACTION_CREATE to ACTION_EXIT do
+                if p^ = choices[i] then
+                        break;
+
+        case i of
+        ACTION_CREATE: writeln('0');
+        ACTION_WORK:   writeln('2');
+        end;
+        
+        
+        halt;
 
         newtPopWindow;
 end;
