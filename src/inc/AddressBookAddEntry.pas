@@ -12,17 +12,19 @@ begin
         {$I-}
         reset(f);              { Сбрасываем указатель на первую позицию в файле }
         {$I+}
+        
 
         if IOResult <> 0 then
                 begin
                         AddressBookError := ADDRESS_BOOK_IO_ERROR;   { Сообщаем программе об ошибке открытия файла }
                         exit;                                        { Выход из процедуры }
-                end
-        else
-                begin
-                        seek(f, filesize(f)); { Переход на последнюю позицию в файле }
-                        write(f, entry);      { Добавление в файл записи }
-                        close(f);             { Закрытие файла }
                 end;
+
+
+        seek(f, filesize(f)); { Переход на последнюю позицию в файле }
+        write(f, entry);      { Добавление записи в файл }
+        close(f);             { Закрытие файла }
+                                
+        AddressBookError := ADDRESS_BOOK_OK; { Сообщаем программе, что ошибок не произошло }
 end;
 

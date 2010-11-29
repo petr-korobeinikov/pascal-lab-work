@@ -34,7 +34,6 @@ var
 {$I inc/AddressBookGetEntries.pas}    { Подключаем определение процедуры получения списка записей }
 {$I inc/AddressBookRemoveEntry.pas}   { Подключаем определение процедуры удаления записи из адресной книги }
 
-
 begin
 {
 AddressBookCreate('books/family');
