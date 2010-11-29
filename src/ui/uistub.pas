@@ -2,7 +2,9 @@ program newtstub;
 uses
         newt;
 
-
+{
+        Процедура вывода заставки программы
+}
 procedure UI_ShowSplashScreen;
 var
         form : newtComponent;
@@ -27,6 +29,9 @@ begin
 end;
 
 
+{
+        Процедура вывода главного меню
+}
 procedure UI_ShowMainMenu;
 var
         form,
@@ -55,6 +60,9 @@ begin
 end;
 
 
+{
+        Процедура вывода формы названия книги
+}
 procedure UI_ShowAddressBookNameForm;
 var
         form : newtComponent;
@@ -78,6 +86,9 @@ begin
 end;
 
 
+{
+        Процедура вывода формы записи адресной книги
+}
 procedure UI_ShowAddressBookEntryForm;
 var
         form : newtComponent;
@@ -106,6 +117,9 @@ begin
 end;
 
 
+{
+        Процедура вывода списка записей адресной книги
+}
 procedure UI_ShowAddressBookListForm;
 var
         form : newtComponent;
@@ -113,18 +127,50 @@ begin
         { Implement me }
 end;
 
+
+{
+        Процедура вывода окна сообщения
+}
+procedure UI_ShowMessageBox(title, message : pChar);
+var
+        form : newtComponent;
+begin
+        newtOpenWindow(10, 5, 40, 7, title);
+
+        form := newtForm(nil, nil, 0);
+        
+        newtFormAddComponents(
+                form,
+                newtLabel(1, 1, message),
+                newtButton(18, 3, 'ОК'),
+                nil
+        );
+
+        newtRunForm(form);
+        newtFormDestroy(form);
+
+        newtPopWindow;
+end;
+
+
 begin
         newtInit;
         newtCls;
 
         UI_ShowSplashScreen;
-        {newtWaitForKey;}
         
         UI_ShowMainMenu;
         
         UI_ShowAddressBookNameForm;
 
         UI_ShowAddressBookEntryForm;
+        
+        UI_ShowMessageBox('MessageBox Title', 'MessageBox Message!');
+        
+        { Too long strings are hiccups:
+        UI_ShowMessageBox('MessageBox Title', 'This message is too long! This message is too long! This message is too long! This message is too long! This message is too long! This message is too long!');
+        }
 
         newtFinished;
 end.
+
