@@ -18,20 +18,19 @@ begin
                 begin
                         AddressBookError := ADDRESS_BOOK_IO_ERROR;    { Сообщаем системе о возникновении ошибки }
                         exit;                                         { Выходим из процедуры }
-                end
-        else
-                begin
-                        i := 0;
-                        setlength(AddressBookEntryList, filesize(f));
-                        while not eof(f) do
-                        begin
-                                read(f, entry);
-                                //writeln(entry.Name, ' ', entry.Phone, ' ', entry.BirthDate);
-                                AddressBookEntryList[i] := entry;
-                                inc(i);
-                        end;
-
-                        close(f);  { Закрываем файл }
                 end;
+
+        { Считываем данные из файла адресной книги }
+        i := 0;
+        setlength(AddressBookEntryList, filesize(f));
+        while not eof(f) do
+        begin
+        read(f, entry);
+        //writeln(entry.Name, ' ', entry.Phone, ' ', entry.BirthDate);
+        AddressBookEntryList[i] := entry;
+        inc(i);
+        end;
+
+        close(f);  { Закрываем файл }
 end;
 
