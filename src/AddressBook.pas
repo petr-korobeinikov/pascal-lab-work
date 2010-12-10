@@ -10,23 +10,24 @@ uses
         sysutils,
         newt;
 
-{$I inc/AddressBookEntry.pas}         { Подключаем определение типа "Запись Адресной Книги" }
+{$I inc/AddressBookEntry.pas}           { Подключаем определение типа "Запись Адресной Книги" }
 
 const
-        ADDRESS_BOOK_OK       = 0;    { Ошибок нет }
-        ADDRESS_BOOK_IO_ERROR = 1;    { Ошибка чтения/записи }
+        ADDRESS_BOOK_OK         = 0;    { Ошибок нет }
+        ADDRESS_BOOK_IO_ERROR   = 1;    { Ошибка чтения/записи }
 
 
-        ACTION_CREATE    = 0;
-        ACTION_CHOOSE    = 1;
-        ACTION_WORK      = 2;
-        ACTION_SEARCH    = 3;
-        ACTION_EXIT      = 4;
+        { Список констант, отвечающих пунктам главного меню }
+        ACTION_CREATE           = 0;
+        ACTION_CHOOSE           = 1;
+        ACTION_WORK             = 2;
+        ACTION_SEARCH           = 3;
+        ACTION_EXIT             = 4;
 
 var
-        AddressBookError        : integer;                   { Глобальная переменная, хранящая в себе последнюю ошибку }
-        AddressBookCurrent      : string[80];                { Название адресной книги, с которой работаем в текущий момент }
-        AddressBookEntryList    : array of AddressBookEntry; { Текущий список записей адресной книги }
+        AddressBookError        : integer;                     { Глобальная переменная, хранящая в себе последнюю ошибку }
+        AddressBookCurrent      : string[80];                  { Название адресной книги, с которой работаем в текущий момент }
+        AddressBookEntryList    : array of AddressBookEntry;   { Текущий список записей адресной книги }
 
         { Список пунктов главного меню }
         choices : array[ACTION_CREATE..ACTION_EXIT] of pchar;
@@ -59,6 +60,7 @@ begin
         { Выводим главное меню }
         repeat
                 begin
+                        { Выводим главное меню }
                         UI_ShowMainMenu;
                         
                         case choice of
@@ -74,10 +76,8 @@ begin
                         ACTION_SEARCH:
                                 begin
                                 end;
-                        ACTION_EXIT:
-                                begin
-                                        break;
-                                end;
+                        ACTION_EXIT: { Завершение работы программы }
+                                break;
                         end;
                 end;
         until false;

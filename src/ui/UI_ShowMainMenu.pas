@@ -1,7 +1,7 @@
 {
         Процедура вывода главного меню
 }
-procedure UI_ShowMainMenu{(choices : array)};
+procedure UI_ShowMainMenu;
 var
         form,
         listBox : newtComponent;
@@ -24,9 +24,6 @@ begin
         newtFormDestroy(form);
         
         p := newtListboxGetCurrent(listBox);
-        
-        {writeln(p^);}
-        { s := p^; }
 
         { Какой пункт был выбран? }
         for i := ACTION_CREATE to ACTION_EXIT do
