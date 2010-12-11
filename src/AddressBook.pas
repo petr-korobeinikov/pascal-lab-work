@@ -40,8 +40,10 @@ var
 
 {$I ui/UI_ShowSplashScreen.pas}       { Подключаем определение процедуры вывода заставки программы }
 {$I ui/UI_ShowMainMenu.pas}           { Подключаем определение процедуры вывода главного меню программы }
+{$I ui/UI_ShowMessageBox.pas}         { Подключаем определение процедуры вывода окна сообщения }
 
 begin
+        { Массив пунктов главного меню }
         choices[ACTION_CREATE] := 'Создать записную книжку';
         choices[ACTION_CHOOSE] := 'Выбрать текущую записную книжку';
         choices[ACTION_WORK]   := 'Работа с записной книжкой';
@@ -66,15 +68,19 @@ begin
                         case choice of
                         ACTION_CREATE:
                                 begin
+                                        UI_ShowMessageBox(choices[choice], choices[choice]);
                                 end;
                         ACTION_CHOOSE:
                                 begin
+                                        UI_ShowMessageBox(choices[choice], choices[choice]);
                                 end;
                         ACTION_WORK:
                                 begin
+                                        UI_ShowMessageBox(choices[choice], choices[choice]);
                                 end;
                         ACTION_SEARCH:
                                 begin
+                                        UI_ShowMessageBox(choices[choice], choices[choice]);
                                 end;
                         ACTION_EXIT: { Завершение работы программы }
                                 break;
