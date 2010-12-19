@@ -33,14 +33,15 @@ var
         choices : array[ACTION_CREATE..ACTION_EXIT] of pchar;
         choice  : integer;
 
-{$I inc/AddressBookCreate.pas}        { Подключаем определение процедуры создания адресной книги }
-{$I inc/AddressBookAddEntry.pas}      { Подключаем определение процедуры добавления записи в адресную книгу }
-{$I inc/AddressBookGetEntries.pas}    { Подключаем определение процедуры получения списка записей }
-{$I inc/AddressBookRemoveEntry.pas}   { Подключаем определение процедуры удаления записи из адресной книги }
+{$I inc/AddressBookCreate.pas}           { Подключаем определение процедуры создания адресной книги }
+{$I inc/AddressBookAddEntry.pas}         { Подключаем определение процедуры добавления записи в адресную книгу }
+{$I inc/AddressBookGetEntries.pas}       { Подключаем определение процедуры получения списка записей }
+{$I inc/AddressBookRemoveEntry.pas}      { Подключаем определение процедуры удаления записи из адресной книги }
 
-{$I ui/UI_ShowSplashScreen.pas}       { Подключаем определение процедуры вывода заставки программы }
-{$I ui/UI_ShowMainMenu.pas}           { Подключаем определение процедуры вывода главного меню программы }
-{$I ui/UI_ShowMessageBox.pas}         { Подключаем определение процедуры вывода окна сообщения }
+{$I ui/UI_ShowSplashScreen.pas}          { Подключаем определение процедуры вывода заставки программы }
+{$I ui/UI_ShowMainMenu.pas}              { Подключаем определение процедуры вывода главного меню программы }
+{$I ui/UI_ShowMessageBox.pas}            { Подключаем определение процедуры вывода окна сообщения }
+{$I ui/UI_ShowAddressBookNameForm.pas}   { Подключаем определение процедуры вывода окна названия адресной книги }
 
 begin
         { Массив пунктов главного меню }
@@ -68,7 +69,13 @@ begin
                         case choice of
                         ACTION_CREATE:
                                 begin
-                                        UI_ShowMessageBox(choices[choice], choices[choice]);
+                                        UI_ShowAddressBookNameForm;
+                                        
+                                        AddressBookError := ADDRESS_BOOK_IO_ERROR; { Stub! }
+                                        if AddressBookError = ADDRESS_BOOK_OK then
+                                                UI_ShowMessageBox('Книжка успешно создана', 'Книжка успешно создана')
+                                        else
+                                                UI_ShowMessageBox('Ошибка!', 'Не получилось создать книжку.');
                                 end;
                         ACTION_CHOOSE:
                                 begin

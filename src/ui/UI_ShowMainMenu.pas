@@ -6,7 +6,6 @@ var
         form,
         listBox : newtComponent;
         p       : ^pchar;
-        s       : pchar;
         i       : integer;
 begin
         newtOpenWindow(10, 5, 41, 7, 'Главное меню');
