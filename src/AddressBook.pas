@@ -62,36 +62,35 @@ begin
         
         { Выводим главное меню }
         repeat
-                begin
-                        { Выводим главное меню }
-                        UI_ShowMainMenu;
-                        
-                        case choice of
-                        ACTION_CREATE:
-                                begin
-                                        UI_ShowAddressBookNameForm;
-                                        
-                                        AddressBookError := ADDRESS_BOOK_IO_ERROR; { Stub! }
-                                        if AddressBookError = ADDRESS_BOOK_OK then
-                                                UI_ShowMessageBox('Книжка успешно создана', 'Книжка успешно создана')
-                                        else
-                                                UI_ShowMessageBox('Ошибка!', 'Не получилось создать книжку.');
-                                end;
-                        ACTION_CHOOSE:
-                                begin
-                                        UI_ShowMessageBox(choices[choice], choices[choice]);
-                                end;
-                        ACTION_WORK:
-                                begin
-                                        UI_ShowMessageBox(choices[choice], choices[choice]);
-                                end;
-                        ACTION_SEARCH:
-                                begin
-                                        UI_ShowMessageBox(choices[choice], choices[choice]);
-                                end;
-                        ACTION_EXIT: { Завершение работы программы }
-                                break;
+                { Выводим главное меню }
+                UI_ShowMainMenu;
+
+                case choice of
+                ACTION_CREATE:
+                        begin
+                                UI_ShowAddressBookNameForm;
+
+                                AddressBookError := ADDRESS_BOOK_IO_ERROR; { Stub! }
+                                if AddressBookError = ADDRESS_BOOK_OK then
+                                        UI_ShowMessageBox('Книжка успешно создана', 'Книжка успешно создана')
+                                else
+                                        UI_ShowMessageBox('Ошибка!', 'Не получилось создать книжку.');
                         end;
+                ACTION_CHOOSE:
+                        begin
+                                UI_ShowAddressBookNameForm;
+                                UI_ShowMessageBox('Выбрана текущая книжка', 'Текущая книжка успешно выбрана.')
+                        end;
+                ACTION_WORK:
+                        begin
+                                UI_ShowMessageBox(choices[choice], choices[choice]);
+                        end;
+                ACTION_SEARCH:
+                        begin
+                                UI_ShowMessageBox(choices[choice], choices[choice]);
+                        end;
+                ACTION_EXIT: { Завершение работы программы }
+                        break;
                 end;
         until false;
         
