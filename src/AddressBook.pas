@@ -13,8 +13,9 @@ uses
 {$I inc/AddressBookEntry.pas}           { Подключаем определение типа "Запись Адресной Книги" }
 
 const
-        ADDRESS_BOOK_OK         = 0;    { Ошибок нет }
-        ADDRESS_BOOK_IO_ERROR   = 1;    { Ошибка чтения/записи }
+        ADDRESS_BOOK_OK               = 0;    { Ошибок нет }
+        ADDRESS_BOOK_IO_ERROR         = 1;    { Ошибка чтения/записи }
+        ADDRESS_BOOK_CANCEL_OPERATION = 2;    { Была нажата кнопка "Отменить" }
 
 
         { Список констант, отвечающих пунктам главного меню }
@@ -26,7 +27,7 @@ const
 
 var
         AddressBookError        : integer;                     { Глобальная переменная, хранящая в себе последнюю ошибку }
-        AddressBookCurrent      : string[80];                  { Название адресной книги, с которой работаем в текущий момент }
+        AddressBookCurrent      : pchar;                       { Название адресной книги, с которой работаем в текущий момент }
         AddressBookEntryList    : array of AddressBookEntry;   { Текущий список записей адресной книги }
 
         { Список пунктов главного меню }
@@ -62,6 +63,13 @@ begin
         
         { Выводим главное меню }
         repeat
+                {
+                        Обнуляем переменную, хранящую код последней ошибки.
+                        В противном случае её значение могло бы сохраниться
+                        после последней очередной итерации.
+                }
+                AddressBookError := ADDRESS_BOOK_OK;
+                
                 { Выводим главное меню }
                 UI_ShowMainMenu;
 
@@ -69,12 +77,18 @@ begin
                 ACTION_CREATE:
                         begin
                                 UI_ShowAddressBookNameForm;
-
-                                AddressBookError := ADDRESS_BOOK_IO_ERROR; { Stub! }
-                                if AddressBookError = ADDRESS_BOOK_OK then
-                                        UI_ShowMessageBox('Книжка успешно создана', 'Книжка успешно создана')
+                                
+                                if AddressBookError = ADDRESS_BOOK_CANCEL_OPERATION then
+                                        { Пользователь отменил действие }
+                                        UI_ShowMessageBox('Действие отменено', 'Вы решили прервать операцию.')
                                 else
-                                        UI_ShowMessageBox('Ошибка!', 'Не получилось создать книжку.');
+                                        begin
+                                                { Пытаемся создать записную книжку }
+                                                { ... }
+                                                UI_ShowMessageBox('Введено значение', (AddressBookCurrent));
+                                                { UI_ShowMessageBox('Ошибка!', 'Не получилось создать книжку.'); }
+                                                UI_ShowMessageBox('Книжка успешно создана', 'Книжка успешно создана');
+                                        end;
                         end;
                 ACTION_CHOOSE:
                         begin
