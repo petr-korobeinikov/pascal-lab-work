@@ -5,7 +5,7 @@
 procedure UI_ShowAddressBookNameForm;
 var
         m             : string;
-        p             : pchar;
+        p             : pChar;
         
         buttonCancel,
         nameEntry,
