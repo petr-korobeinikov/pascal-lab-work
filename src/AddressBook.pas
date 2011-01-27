@@ -27,11 +27,11 @@ const
 
 var
         AddressBookError        : integer;                     { Глобальная переменная, хранящая в себе последнюю ошибку }
-        AddressBookCurrent      : pchar;                       { Название адресной книги, с которой работаем в текущий момент }
+        AddressBookCurrent      : pChar;                       { Название адресной книги, с которой работаем в текущий момент }
         AddressBookEntryList    : array of AddressBookEntry;   { Текущий список записей адресной книги }
 
         { Список пунктов главного меню }
-        choices : array[ACTION_CREATE..ACTION_EXIT] of pchar;
+        choices : array[ACTION_CREATE..ACTION_EXIT] of pChar;
         choice  : integer;
 
 {$I inc/AddressBookCreate.pas}           { Подключаем определение процедуры создания адресной книги }
@@ -122,4 +122,3 @@ begin
         { Выключаем псевдографический режим }
         newtFinished;
 end.
-

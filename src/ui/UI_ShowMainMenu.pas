@@ -5,7 +5,7 @@ procedure UI_ShowMainMenu;
 var
         form,
         listBox : newtComponent;
-        p       : ^pchar;
+        p       : ^pChar;
         i       : integer;
 begin
         newtOpenWindow(10, 5, 41, 7, 'Главное меню');
