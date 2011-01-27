@@ -1,6 +1,5 @@
 {
         Процедура вывода формы названия книги
-        @TODO: Проверить, не пустое ли значение введено?
 }
 procedure UI_ShowAddressBookNameForm;
 var
@@ -34,7 +33,13 @@ begin
         if buttonCancel = newtFormGetCurrent(form) then
                 AddressBookError := ADDRESS_BOOK_CANCEL_OPERATION
         else
-                AddressBookCurrent := strnew(p);
+                begin
+                        { Если введено пустое значение, произойдет ошибка при обращении к указателю. }
+                        if p = '' then
+                                AddressBookCurrent := ''
+                        else
+                                AddressBookCurrent := strnew(p);
+                end;
         
         newtFormDestroy(form);
 

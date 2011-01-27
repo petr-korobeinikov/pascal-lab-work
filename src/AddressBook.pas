@@ -79,13 +79,16 @@ begin
                                 UI_ShowAddressBookNameForm;
                                 
                                 if AddressBookError = ADDRESS_BOOK_CANCEL_OPERATION then
-                                        { Пользователь отменил действие }
-                                        UI_ShowMessageBox('Действие отменено', 'Вы решили прервать операцию.')
+                                        begin
+                                                { Пользователь отменил действие }
+                                                UI_ShowMessageBox('Действие отменено', 'Вы решили прервать операцию.');
+                                                continue;
+                                        end
                                 else
                                         begin
                                                 { Пытаемся создать записную книжку }
                                                 { ... }
-                                                UI_ShowMessageBox('Введено значение', (AddressBookCurrent));
+                                                UI_ShowMessageBox('Введено значение', AddressBookCurrent);
                                                 { UI_ShowMessageBox('Ошибка!', 'Не получилось создать книжку.'); }
                                                 UI_ShowMessageBox('Книжка успешно создана', 'Книжка успешно создана');
                                         end;
@@ -93,7 +96,15 @@ begin
                 ACTION_CHOOSE:
                         begin
                                 UI_ShowAddressBookNameForm;
-                                UI_ShowMessageBox('Выбрана текущая книжка', 'Текущая книжка успешно выбрана.')
+                                
+                                if AddressBookError = ADDRESS_BOOK_CANCEL_OPERATION then
+                                        begin
+                                                { Пользователь отменил действие }
+                                                UI_ShowMessageBox('Действие отменено', 'Вы решили прервать операцию.');
+                                                continue;
+                                        end
+                                else
+                                        UI_ShowMessageBox('Выбрана текущая книжка', strcat('Выбрана книжка ', AddressBookCurrent));
                         end;
                 ACTION_WORK:
                         begin
